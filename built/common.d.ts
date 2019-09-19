@@ -5,12 +5,7 @@
  * @version $Id$
  */
 import { UploadFile } from "./interface";
-declare const uploadFile: (
-  file: File,
-  client: any,
-  key: string,
-  index: number
-) => Promise<unknown>;
+declare const uploadFile: (file: File, client: any, key: string, index: number) => Promise<unknown>;
 declare const getObjectURL: (file: File) => any;
 declare const isImageUrl: (file: UploadFile) => boolean;
 export { uploadFile, getObjectURL, isImageUrl };

@@ -6,7 +6,8 @@
  */
 
 //上传图片到阿里云
-import { Modal, message, Icon, Input, Button } from 'antd';
+import { Modal, message, Icon, Input, Button } from "antd";
+const OSS = require("ali-oss");
 import {
   RcFile,
   UploadProps,
@@ -15,8 +16,8 @@ import {
   UploadLocale,
   UploadChangeParam,
   UploadType,
-  UploadListType,
-} from './interface';
+  UploadListType
+} from "./interface";
 /*
   file: { [propsName: string]: any }; //上传文件
   client: any; //上传凭证
@@ -45,14 +46,14 @@ const progress = (p: number, checkpoint: optionsT) => {
 };
 
 const uploadFile = (file: File, client: any, key: string, index: number) => {
-  let uploadFileClient = client;
+  let uploadFileClient = new OSS(client);
   var options: { [propsName: string]: any } = {
     progress: progress,
     partSize: 100 * 1024,
     meta: {
       year: 2017,
-      people: 'test',
-    },
+      people: "test"
+    }
   };
   if (current_checkpoint) {
     options.checkpoint = current_checkpoint;
@@ -62,7 +63,7 @@ const uploadFile = (file: File, client: any, key: string, index: number) => {
     uploadFileClient
       .multipartUpload(key, file, options)
       .then((res: any) => {
-        console.log('upload success: %j', res);
+        console.log("upload success: %j", res);
         current_checkpoint = null;
         uploadFileClient = null;
         res.successIndex = nowindex;
@@ -70,11 +71,11 @@ const uploadFile = (file: File, client: any, key: string, index: number) => {
       })
       .catch((err: any) => {
         console.log(err);
-        reject({ error: 'error', failIndex: nowindex });
+        reject({ error: "error", failIndex: nowindex });
         if (uploadFileClient && uploadFileClient.isCancel()) {
-          message.error('stop-upload!');
+          message.error("stop-upload!");
         } else {
-          message.error('error');
+          message.error("error");
         }
       });
   });
@@ -97,16 +98,16 @@ const getObjectURL = (file: File) => {
 };
 var extname = function extname(url?: string) {
   if (!url) {
-    return '';
+    return "";
   }
 
-  var temp = url.split('/');
+  var temp = url.split("/");
   var filename = temp[temp.length - 1];
   var filenameWithoutSuffix = filename.split(/#|\?/)[0];
-  return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0];
+  return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [""])[0];
 };
 const isImageFileType = function isImageFileType(type) {
-  return !!type && type.indexOf('image/') === 0;
+  return !!type && type.indexOf("image/") === 0;
 };
 
 const isImageUrl = function isImageUrl(file: UploadFile) {
@@ -120,7 +121,10 @@ const isImageUrl = function isImageUrl(file: UploadFile) {
   }
   var extension = extname(url);
 
-  if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp|dpg)$/i.test(extension)) {
+  if (
+    /^data:image\//.test(url) ||
+    /(webp|svg|png|gif|jpg|jpeg|bmp|dpg)$/i.test(extension)
+  ) {
     return true;
   } else if (/^data:/.test(url)) {
     // other file types of base64
