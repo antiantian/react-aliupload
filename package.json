@@ -1,6 +1,6 @@
 {
   "name": "react-alioss",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "scripts": {
     "dev": "webpack  --mode production",
@@ -8,10 +8,14 @@
     "build": "tsc",
     "lib": "gulp lib"
   },
-  "keywords": ["react", "uploadImage", "alioss"],
+  "keywords": ["react", "typescript", "uploadImage", "ali-oss"],
   "author": "anyutz",
   "main": "dist/bundle.js",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antiantian/react-aliupload.git"
+  },
   "dependencies": {
     "@babel/preset-env": "^7.6.0",
     "@babel/core": "^7.4.5",
