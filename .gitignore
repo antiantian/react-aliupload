@@ -6,10 +6,8 @@ react-uploadimage/
 design/
 gulpTool/
 components/
-
-/.pnp
-.pnp.js
-
+gulpfile.js
+ 
 # testing
 /coverage
 
