@@ -6,6 +6,8 @@ react-uploadimage/
 design/
 gulpTool/
 components/
+tst/
+built/
 gulpfile.js
  
 # testing
@@ -27,3 +29,5 @@ yarn-error.log*
 
 paths.js
 webpack.config.js
+.antd-tools.config.js
+tsconfig.json

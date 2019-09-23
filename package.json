@@ -1,6 +1,6 @@
 {
   "name": "react-alioss",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "scripts": {
     "dev": "webpack  --mode production",
@@ -83,5 +83,6 @@
     "ui-component-loader": "^1.4.2",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8"
-  }
+  },
+  "typings": "lib/main.d.ts"
 }
