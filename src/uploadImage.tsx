@@ -5,9 +5,9 @@
  * @version $Id$
  */
 import React, { Component } from "react";
-import { Modal, message, Icon, Input, Button } from "antd";
-import "./style.less";
 
+import "./style.less";
+import { Modal, message, Icon } from "antd";
 import { uploadFile, getObjectURL } from "./common";
 import { ITEMT, UpProps } from "./interface";
 import ImageModal from "./ImageModal";
@@ -380,7 +380,7 @@ class UploadImages extends Component<UpProps, BasicState> {
       imgSrc: this.state.imgSrc
     };
     return (
-      <div>
+      <div className="ali_upload">
         <ImageModal {...modalProps} />
         {this.props.tips && this.props.tips()}
         {this.uploadImageElement(this.state.uploadMess)}

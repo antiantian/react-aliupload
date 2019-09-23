@@ -5,7 +5,8 @@
  * @version $Id$
  */
 //上传图片到阿里云
-import { message } from 'antd';
+import { message } from "antd";
+var OSS = require("ali-oss");
 var current_checkpoint;
 var progress = function (p, checkpoint) {
     return function (done) {
@@ -14,14 +15,14 @@ var progress = function (p, checkpoint) {
     };
 };
 var uploadFile = function (file, client, key, index) {
-    var uploadFileClient = client;
+    var uploadFileClient = new OSS(client);
     var options = {
         progress: progress,
         partSize: 100 * 1024,
         meta: {
             year: 2017,
-            people: 'test',
-        },
+            people: "test"
+        }
     };
     if (current_checkpoint) {
         options.checkpoint = current_checkpoint;
@@ -31,7 +32,7 @@ var uploadFile = function (file, client, key, index) {
         uploadFileClient
             .multipartUpload(key, file, options)
             .then(function (res) {
-            console.log('upload success: %j', res);
+            console.log("upload success: %j", res);
             current_checkpoint = null;
             uploadFileClient = null;
             res.successIndex = nowindex;
@@ -39,12 +40,12 @@ var uploadFile = function (file, client, key, index) {
         })
             .catch(function (err) {
             console.log(err);
-            reject({ error: 'error', failIndex: nowindex });
+            reject({ error: "error", failIndex: nowindex });
             if (uploadFileClient && uploadFileClient.isCancel()) {
-                message.error('stop-upload!');
+                message.error("stop-upload!");
             }
             else {
-                message.error('error');
+                message.error("error");
             }
         });
     });
@@ -68,15 +69,15 @@ var getObjectURL = function (file) {
 };
 var extname = function extname(url) {
     if (!url) {
-        return '';
+        return "";
     }
-    var temp = url.split('/');
+    var temp = url.split("/");
     var filename = temp[temp.length - 1];
     var filenameWithoutSuffix = filename.split(/#|\?/)[0];
-    return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0];
+    return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [""])[0];
 };
 var isImageFileType = function isImageFileType(type) {
-    return !!type && type.indexOf('image/') === 0;
+    return !!type && type.indexOf("image/") === 0;
 };
 var isImageUrl = function isImageUrl(file) {
     if (isImageFileType(file.type)) {
@@ -87,7 +88,8 @@ var isImageUrl = function isImageUrl(file) {
         return false;
     }
     var extension = extname(url);
-    if (/^data:image\//.test(url) || /(webp|svg|png|gif|jpg|jpeg|bmp|dpg)$/i.test(extension)) {
+    if (/^data:image\//.test(url) ||
+        /(webp|svg|png|gif|jpg|jpeg|bmp|dpg)$/i.test(extension)) {
         return true;
     }
     else if (/^data:/.test(url)) {

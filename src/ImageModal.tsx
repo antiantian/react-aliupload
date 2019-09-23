@@ -1,7 +1,5 @@
-import { Form, Input, Modal, Select, Switch } from "antd";
-import { FormComponentProps } from "antd/es/form";
 import React from "react";
-
+import { Modal } from "antd";
 import "cropperjs/dist/cropper.css";
 import Cropper from "react-cropper";
 import "./copper.less";
