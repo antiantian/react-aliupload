@@ -1,6 +1,6 @@
 {
   "name": "react-alioss",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "scripts": {
     "dev": "webpack  --mode production",
@@ -8,11 +8,7 @@
     "build": "tsc",
     "lib": "gulp lib"
   },
-  "keywords": [
-    "react",
-    "uploadImage",
-    "alioss"
-  ],
+  "keywords": ["react", "uploadImage", "alioss"],
   "author": "anyutz",
   "main": "dist/bundle.js",
   "license": "ISC",
