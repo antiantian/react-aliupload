@@ -19,6 +19,7 @@
     "url": "git+https://github.com/antiantian/react-aliupload.git"
   },
   "dependencies": {
+    "@babel/runtime": "^7.6.0",
     "ali-oss": "^6.1.1",
     "antd": "^3.23.3",
     "react": "^16.9.0",
